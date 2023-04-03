@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace AwesomeNetwork.DAL.Models
+namespace AwesomeNetwork.DAL.Models.Users
 {
     public class User : IdentityUser
     {

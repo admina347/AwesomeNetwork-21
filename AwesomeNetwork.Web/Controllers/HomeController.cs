@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using AwesomeNetwork.Web.Models;
+using AwesomeNetwork.Web.ViewModels.Account;
 
 namespace AwesomeNetwork.Web.Controllers;
 
@@ -12,12 +13,14 @@ public class HomeController : Controller
     {
         _logger = logger;
     }
-
+    [Route("")]
+    [Route("[controller]/[action]")]
     public IActionResult Index()
     {
-        return View();
+        return View(new MainViewModel());
     }
 
+    [Route("[action]")]
     public IActionResult Privacy()
     {
         return View();
