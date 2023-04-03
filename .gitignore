@@ -1,0 +1,6 @@
+/.vscode/
+/AwesomeNetwork.Web/bin/
+/AwesomeNetwork.Web/obj/
+/AwesomeNetwork.Web/wwwroot/
+*.json
+*.csproj
