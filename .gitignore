@@ -2,5 +2,7 @@
 /AwesomeNetwork.Web/bin/
 /AwesomeNetwork.Web/obj/
 /AwesomeNetwork.Web/wwwroot/
+/AwesomeNetwork.DAL/bin/
+/AwesomeNetwork.DAL/obj/
 *.json
 *.csproj
