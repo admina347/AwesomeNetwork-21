@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AwesomeNetwork.ViewModels
+namespace AwesomeNetwork.Web.ViewModels
 {
     public enum Months
     {

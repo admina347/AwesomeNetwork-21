@@ -8,7 +8,7 @@ namespace AwesomeNetwork.DAL.Models.Users
 
         public string LastName { get; set; }
 
-        public string MiddleName { get; set; }
+        public string? MiddleName { get; set; }
 
         public DateTime BirthDate { get; set; }
     }

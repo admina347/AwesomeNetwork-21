@@ -39,12 +39,30 @@ namespace AwesomeNetwork.Controllers.Account
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            // string? ReturnUrl - иначе не пррооходит валидацию.
             if (ModelState.IsValid)
             {
-               
-                var user = _mapper.Map<User>(model);
+                /* 
+                Из контекста можно понять, что у пользователя есть возможность войти в систему как с использованием логина, так и с использованием email. 
+                Однако, метод PasswordSignInAsync не принимает email в качестве первого аргумента, а принимает только username. 
+                Если вы хотите использовать email вместо username, то вам необходимо использовать метод SignInAsync, 
+                после проверки с помощью метода CheckPasswordAsync. 
 
-                var result = await _signInManager.PasswordSignInAsync(user.Email, model.Password, model.RememberMe, false);
+                Однако, этот код не поддерживает проверку на блокировку при неудачных попытках входа, 
+                так как метод SignInAsync не поддерживает этот аргумент. 
+                Если вы хотите проверять блокировку при неудачных попытках входа, то вам нужно использовать другой метод, 
+                как описано в ответе на StackOverflow:
+
+                var user = await userManager.FindByEmailAsync(model.Email);
+                var result = await signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);
+                */
+               
+                //var user = _mapper.Map<User>(model);
+                //Т.к. LoginViewModel принимает email, а _signInManager.PasswordSignInAsync() UserName
+                //Поэтому:
+                var user = await _userManager.FindByEmailAsync(model.Email);
+
+                var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
@@ -61,7 +79,8 @@ namespace AwesomeNetwork.Controllers.Account
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
                 }
             }
-             return View("Views/Home/Index.cshtml");
+            //return View("Views/Home/Index.cshtml");
+            return RedirectToAction("Index", "Home");
         }
 
         [Route("Logout")]
