@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AwesomeNetwork.DAL.Models.Users;
 using AwesomeNetwork.Web.ViewModels.Account;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -56,7 +57,7 @@ namespace AwesomeNetwork.Controllers.Account
                 var user = await userManager.FindByEmailAsync(model.Email);
                 var result = await signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);
                 */
-               
+
                 //var user = _mapper.Map<User>(model);
                 //Т.к. LoginViewModel принимает email, а _signInManager.PasswordSignInAsync() UserName
                 //Поэтому:
@@ -92,5 +93,28 @@ namespace AwesomeNetwork.Controllers.Account
             return RedirectToAction("Index", "Home");
         }
 
+        [Route("MyPage")]
+        [Authorize]
+        [HttpGet]
+        public IActionResult MyPage()
+        {
+            var user = User;
+
+            var result = _userManager.GetUserAsync(user);
+
+            return View("User", new UserViewModel(result.Result));
+        }
+
+        [Route("User/Edit")]
+        [Authorize]
+        [HttpGet]
+        public IActionResult EditUser()
+        {
+            var user = User;
+
+            var result = _userManager.GetUserAsync(user);
+
+            return View("UserEditViewModel", new UserViewModel(result.Result));
+        }
     }
 }

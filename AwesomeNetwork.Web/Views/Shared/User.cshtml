@@ -1,0 +1,46 @@
+@model AwesomeNetwork.Web.ViewModels.Account.UserViewModel;
+
+
+@if (Model != null)
+{
+    <div class="block-reg background-white">
+        <div class="container content-lg">
+            <div class="row text-center">
+                <h2>@Model.User.GetFullName()</h2>
+            </div>
+            <div class="row">
+                <div class="col-sm-5 sm-margin-b-60">
+                    <img class="full-width img-responsive" src="@Model.User.Image" alt="Image">
+                </div>
+                
+                <div class="col-sm-7">
+                    <div class="container text-left">
+                        <div>
+                            <p>Статус: @Model.User.Status</p>
+                        </div>
+                        <div>
+                            <p>Дата рождения: @Model.User.BirthDate</p>
+                        </div>
+                        <div>
+                            <p>О себе: @Model.User.About</p>
+                        </div>
+                        <div>
+                            <p>Email: @Model.User.Email</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <a href="/User/Edit" class="btn enter_submit" role="button">Редактировать</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div>
+        <label> Поиск не дал результатов.</label>
+    </div>
+}

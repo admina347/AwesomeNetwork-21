@@ -1,0 +1,48 @@
+@model AwesomeNetwork.Web.ViewModels.Account.UserViewModel;
+
+
+@if (Model != null)
+{
+    <div class="block-reg background-white">
+        <div class="container content-lg">
+            <div class="row">
+                <div class="col-mb-5">
+                    <label class="form-label">Id</label>
+                    <input class="form-control" type="text" asp-for="User.Id" readonly/>
+                </div>
+                <div class="col-mb-5">
+                    <label class="form-label">Имя</label>
+                    <input class="form-control" type="text" asp-for="User.FirstName" />
+                </div>
+                <div class="col-mb-5">
+                    <label class="form-label">Фамилия</label>
+                    <input class="form-control" type="text" asp-for="User.LastName" />
+                </div>
+                <div class="col-mb-5">
+                    <label class="form-label">Отчество</label>
+                    <input class="form-control" type="text" asp-for="User.MiddleName" placeholder="Введите отчество"/>
+                </div>
+                <div class="col-mb-5">
+                    <label class="form-label">Дата рождения</label>
+                    <input class="form-control" type="date" asp-for="User.BirthDate"/>
+                </div>
+                <div class="col-mb-5">
+                    <label class="form-label">Email</label>
+                    <input class="form-control" type="email" asp-for="User.Email"/>
+                </div>
+                <div class="col-mb-5">
+                    <label class="form-label">Фото</label>
+                    <input class="form-control" type="text" asp-for="User.Image" />
+                </div>
+                <div class="col-mb-5">
+                    <label class="form-label">Статус</label>
+                    <input class="form-control" type="text" asp-for="User.Status" />
+                </div>
+                <div class="col-mb-5">
+                    <label class="form-label">О себе</label>
+                    <input class="form-control" type="text" asp-for="User.About" />
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -5,9 +5,12 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="search-container">
+    <div class="col-2">
         <form method="post" asp-controller="AccountManager" asp-action="Logout">
             <input class="enter_submit" type="submit" value="Выход" />
         </form>
+    </div>
+    <div class="col-2">
+        <a href="/MyPage" class="btn enter_submit" role="button">Мой профиль</a>
     </div>
 }
