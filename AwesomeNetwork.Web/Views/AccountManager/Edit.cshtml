@@ -1,48 +1,56 @@
-@model AwesomeNetwork.Web.ViewModels.Account.UserViewModel;
+@model AwesomeNetwork.Web.ViewModels.Account.UserEditViewModel;
 
 
 @if (Model != null)
 {
+    <form method="post" asp-controller="AccountManager" asp-action="Update">
     <div class="block-reg background-white">
         <div class="container content-lg">
+            <div class="row text-center">
+                <h2>Редактирование пользователя</h2>
+            </div>
             <div class="row">
                 <div class="col-mb-5">
                     <label class="form-label">Id</label>
-                    <input class="form-control" type="text" asp-for="User.Id" readonly/>
+                    <input class="form-control" type="text" asp-for="UserId" readonly/>
                 </div>
                 <div class="col-mb-5">
                     <label class="form-label">Имя</label>
-                    <input class="form-control" type="text" asp-for="User.FirstName" />
+                    <input class="form-control" type="text" asp-for="FirstName" />
                 </div>
                 <div class="col-mb-5">
                     <label class="form-label">Фамилия</label>
-                    <input class="form-control" type="text" asp-for="User.LastName" />
+                    <input class="form-control" type="text" asp-for="LastName" />
                 </div>
                 <div class="col-mb-5">
                     <label class="form-label">Отчество</label>
-                    <input class="form-control" type="text" asp-for="User.MiddleName" placeholder="Введите отчество"/>
+                    <input class="form-control" type="text" asp-for="MiddleName" placeholder="Введите отчество"/>
                 </div>
                 <div class="col-mb-5">
                     <label class="form-label">Дата рождения</label>
-                    <input class="form-control" type="date" asp-for="User.BirthDate"/>
+                    <input class="form-control" type="date" asp-for="BirthDate"/>
                 </div>
                 <div class="col-mb-5">
                     <label class="form-label">Email</label>
-                    <input class="form-control" type="email" asp-for="User.Email"/>
+                    <input class="form-control" type="email" asp-for="Email"/>
                 </div>
                 <div class="col-mb-5">
                     <label class="form-label">Фото</label>
-                    <input class="form-control" type="text" asp-for="User.Image" />
+                    <input class="form-control" type="text" asp-for="Image" />
                 </div>
                 <div class="col-mb-5">
                     <label class="form-label">Статус</label>
-                    <input class="form-control" type="text" asp-for="User.Status" />
+                    <input class="form-control" type="text" asp-for="Status" />
                 </div>
                 <div class="col-mb-5">
                     <label class="form-label">О себе</label>
-                    <input class="form-control" type="text" asp-for="User.About" />
+                    <input class="form-control" type="text" asp-for="About" />
+                </div>
+                <div class="col-mb-5" text-center>
+                    <button type="submit" class="btn btn-primary" asp-action="Update">Сохранить</button>
                 </div>
             </div>
         </div>
     </div>
+    </form>
 }

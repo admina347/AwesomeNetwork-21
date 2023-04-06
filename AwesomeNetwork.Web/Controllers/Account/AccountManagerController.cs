@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AwesomeNetwork.DAL.Extentions;
 using AwesomeNetwork.DAL.Models.Users;
 using AwesomeNetwork.Web.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
@@ -66,14 +67,7 @@ namespace AwesomeNetwork.Controllers.Account
                 var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                    {
-                        return Redirect(model.ReturnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
+                    return RedirectToAction("MyPage", "AccountManager");
                 }
                 else
                 {
@@ -108,13 +102,58 @@ namespace AwesomeNetwork.Controllers.Account
         [Route("User/Edit")]
         [Authorize]
         [HttpGet]
-        public IActionResult EditUser()
+        public IActionResult Edit()
         {
             var user = User;
 
             var result = _userManager.GetUserAsync(user);
 
-            return View("UserEditViewModel", new UserViewModel(result.Result));
+            if (result != null)
+            {
+                UserEditViewModel model = new UserEditViewModel
+                {
+                    UserId = result.Result.Id,
+                    Email = result.Result.Email,
+                    FirstName = result.Result.FirstName,
+                    LastName = result.Result.LastName,
+                    MiddleName = result.Result.MiddleName,
+                    BirthDate = result.Result.BirthDate,
+                    Image = result.Result.Image,
+                    Status = result.Result.Status,
+                    About = result.Result.About
+                };
+                return View("Edit", model);
+            }
+            return RedirectToAction("Index", "Home");
+            //return View("Edit", new UserEditViewModel(result.Result));
+        }
+
+        [Authorize]
+        [Route("Update")]
+        [HttpPost]
+        public async Task<IActionResult> Update(UserEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByIdAsync(model.UserId);
+
+                user.Convert(model);
+
+                var result = await _userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("MyPage", "AccountManager");
+                }
+                else
+                {
+                    return RedirectToAction("Edit", "AccountManager");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Некорректные данные");
+                return View("Edit", model);
+            }
         }
     }
 }
