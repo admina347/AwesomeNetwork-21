@@ -1,7 +1,9 @@
 using AutoMapper;
 using AwesomeNetwork;
 using AwesomeNetwork.DAL;
+using AwesomeNetwork.DAL.Data.Repository;
 using AwesomeNetwork.DAL.Models.Users;
+using AwesomeNetwork.Extentions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,9 +14,11 @@ builder.Services.AddControllersWithViews();
 //Db
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
-
+//add reppository
+builder.Services.AddUnitOfWork()
+.AddCustomRepository <Friend, FriendsRepository>()
 //Identity password settings
-builder.Services.AddIdentity<User, IdentityRole>(opts => {
+.AddIdentity<User, IdentityRole>(opts => {
   opts.Password.RequiredLength = 5;   
   opts.Password.RequireNonAlphanumeric = false;  
   opts.Password.RequireLowercase = false; 

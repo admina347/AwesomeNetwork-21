@@ -10,5 +10,7 @@ namespace AwesomeNetwork.Web.ViewModels.Account
         {
             User = user;
         }
+
+        public List <User> Friends { get; set; }
     }
 }
