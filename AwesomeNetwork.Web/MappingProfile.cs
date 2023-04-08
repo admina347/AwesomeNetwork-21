@@ -14,6 +14,7 @@ namespace AwesomeNetwork
                 .ForMember(x => x.UserName, opt => opt.MapFrom(c => c.Login));
             CreateMap<LoginViewModel, User>()
                 .ForMember(u => u.Email, opt => opt.MapFrom(l => l.Email));
+            CreateMap<User, UserWithFriendExt>();
         }
     }
 }

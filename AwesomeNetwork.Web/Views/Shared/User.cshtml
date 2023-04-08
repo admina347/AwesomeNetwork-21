@@ -4,35 +4,67 @@
 @if (Model != null)
 {
     <div class="block-reg background-white">
-        <div class="container content-lg">
-            <div class="row text-center">
-                <h2>@Model.User.GetFullName()</h2>
+    <div class="container content-lg">
+        <div class="row text-center">
+            <h2>@Model.User.GetFullName()</h2>
+        </div>
+        <div class="row">
+            <div class="col-sm-5 sm-margin-b-60">
+                <img class="full-width img-responsive" src="@Model.User.Image" alt="Image">
             </div>
-            <div class="row">
-                <div class="col-sm-5 sm-margin-b-60">
-                    <img class="full-width img-responsive" src="@Model.User.Image" alt="Image">
+
+            <div class="col-sm-7">
+                <div class="container text-left">
+                    <div>
+                        <p>Статус: @Model.User.Status</p>
+                    </div>
+                    <div>
+                        <p>Дата рождения: @Model.User.BirthDate</p>
+                    </div>
+                    <div>
+                        <p>О себе: @Model.User.About</p>
+                    </div>
+                    <div>
+                        <p>Email: @Model.User.Email</p>
+                    </div>
                 </div>
-                
-                <div class="col-sm-7">
-                    <div class="container text-left">
-                        <div>
-                            <p>Статус: @Model.User.Status</p>
-                        </div>
-                        <div>
-                            <p>Дата рождения: @Model.User.BirthDate</p>
-                        </div>
-                        <div>
-                            <p>О себе: @Model.User.About</p>
-                        </div>
-                        <div>
-                            <p>Email: @Model.User.Email</p>
-                        </div>
+
+                <div class="container text-left">
+                    <label class="gray-text">Список друзей</label>
+
+                    @if (Model.Friends.Count != 0)
+                        {
+
+                            @foreach (var user in @Model.Friends)
+                            {
+                                <div>
+                                    <div class="text-center">
+                                        <img src="@user.Image" class="ava"  width="20%"/>
+                                    </div>
+                                    <div class="text-center">
+                                        @user.GetFullName()
+                                    </div>
+                                    <div class="text-center">
+                                        <form asp-controller="AccountManager" asp-action="DeleteFriend" asp-route-id="@user.Id" method="post">
+                                            <button type="submit" class="btn btn-sm btn-primary">Удалить из друзей</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div>
+                                <label> У вас пока нет друзей.</label>
+                            </div>
+                        }
+
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-5">
-                    <a href="/User/Edit" class="btn enter_submit" role="button">Редактировать</a>
+                    <a href="/Edit" class="btn enter_submit" role="button">Редактировать</a>
                 </div>
             </div>
         </div>
@@ -41,6 +73,6 @@
 else
 {
     <div>
-        <label> Поиск не дал результатов.</label>
-    </div>
+    <label> Поиск не дал результатов.</label>
+</div>
 }

@@ -108,7 +108,7 @@ namespace AwesomeNetwork.Controllers.Account
             return View("User", model);
         }
 
-        [Route("User/Edit")]
+        [Route("Edit")]
         [Authorize]
         [HttpGet]
         public IActionResult Edit()
@@ -166,7 +166,7 @@ namespace AwesomeNetwork.Controllers.Account
         }
         //search
         [Route("UserList")]
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> UserList(string search)
         {
             var model = await CreateSearch(search);
