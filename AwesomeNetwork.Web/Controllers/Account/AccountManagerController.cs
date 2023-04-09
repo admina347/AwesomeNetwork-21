@@ -38,7 +38,7 @@ namespace AwesomeNetwork.Controllers.Account
             var usergen = new GenetateUsers();
             var userlist = usergen.Populate(35);
 
-            foreach(var user in userlist)
+            foreach (var user in userlist)
             {
                 var result = await _userManager.CreateAsync(user, "123456");
 
@@ -200,7 +200,13 @@ namespace AwesomeNetwork.Controllers.Account
 
             var result = await _userManager.GetUserAsync(currentuser);
 
-            var list = _userManager.Users.AsEnumerable().Where(x => x.GetFullName().ToLower().Contains(search.ToLower())).ToList();
+            //var list = _userManager.Users.AsEnumerable().Where(x => x.GetFullName().ToLower().Contains(search.ToLower())).ToList();
+            var list = _userManager.Users.AsEnumerable().ToList();
+            if (!string.IsNullOrEmpty(search))
+            {
+                list = list.Where(x => x.GetFullName().ToLower().Contains(search.ToLower())).ToList();
+            }
+
             var withfriend = await GetAllFriend();
 
             var data = new List<UserWithFriendExt>();
