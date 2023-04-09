@@ -3,6 +3,7 @@ using AwesomeNetwork;
 using AwesomeNetwork.DAL;
 using AwesomeNetwork.DAL.Data.Repository;
 using AwesomeNetwork.DAL.Models.Users;
+using AwesomeNetwork.Data.Repository;
 using AwesomeNetwork.Extentions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //add reppository
 builder.Services.AddUnitOfWork()
 .AddCustomRepository <Friend, FriendsRepository>()
+.AddCustomRepository <Message, MessageRepository>()
 //Identity password settings
 .AddIdentity<User, IdentityRole>(opts => {
   opts.Password.RequiredLength = 5;   

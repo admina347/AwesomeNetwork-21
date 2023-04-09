@@ -4,13 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AwesomeNetwork.DAL
 {
-    public class FriendConfiguration : IEntityTypeConfiguration<Friend>
+    public class MessageConfuiguration : IEntityTypeConfiguration<Message>
     {
-        public void Configure(EntityTypeBuilder<Friend> builder)
+        public void Configure(EntityTypeBuilder<Message> builder)
         {
-            builder.ToTable("UserFriends").HasKey(p => p.Id);
+            builder.ToTable("Mesages").HasKey(p => p.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
-
         }
     }
 }

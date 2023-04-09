@@ -4,7 +4,6 @@ namespace AwesomeNetwork.Web.ViewModels.Account
 {
     public class RegisterViewModel
     {
-
         [Required(ErrorMessage = "Поле Имя обязательно для заполнения")]
         [DataType(DataType.Text)]
         [Display(Name = "Имя", Prompt = "Введите имя")]
@@ -44,10 +43,6 @@ namespace AwesomeNetwork.Web.ViewModels.Account
         [Display(Name = "Подтвердить пароль", Prompt = "Введите пароль повторно")]
         public string PasswordConfirm { get; set; }
 
-        [Required(ErrorMessage = "Поле Никнейм обязательно для заполнения")]
-        [DataType(DataType.Text)]
-        [Display(Name = "Никнейм", Prompt = "Введите никнейм")]
-        public string Login { get; set; }
-
+        public string Login => EmailReg;
     }
 }

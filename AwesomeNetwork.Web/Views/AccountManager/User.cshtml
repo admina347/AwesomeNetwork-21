@@ -19,7 +19,7 @@
                         <p>Статус: @Model.User.Status</p>
                     </div>
                     <div>
-                        <p>Дата рождения: @Model.User.BirthDate</p>
+                        <p>Дата рождения: @Model.User.BirthDate.ToLongDateString()</p>
                     </div>
                     <div>
                         <p>О себе: @Model.User.About</p>
@@ -43,6 +43,11 @@
                                     </div>
                                     <div class="text-center">
                                         @user.GetFullName()
+                                    </div>
+                                    <div class="text-center">
+                                        <form asp-controller="AccountManager" asp-action="Chat" asp-route-id="@user.Id" method="post">
+                                            <button type="submit" class="btn btn-sm btn-primary min-width-but">Чат</button>
+                                        </form>
                                     </div>
                                     <div class="text-center">
                                         <form asp-controller="AccountManager" asp-action="DeleteFriend" asp-route-id="@user.Id" method="post">
