@@ -4,5 +4,5 @@
 #/AwesomeNetwork.Web/wwwroot/
 /AwesomeNetwork.DAL/bin/
 /AwesomeNetwork.DAL/obj/
-*.json
+#*.json
 #*.csproj
